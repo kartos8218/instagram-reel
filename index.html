@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Video Downloader</title>
+</head>
+<body>
+    <h1>Instagram Video Downloader</h1>
+    <input type="text" id="url" placeholder="Enter Instagram video URL" />
+    <button id="downloadBtn">Download Video</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', async () => {
+            const url = document.getElementById('url').value;
+            const response = await fetch('https://your-app-name.onrender.com/api/download', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url }),
+            });
+            const data = await response.json();
+            const result = document.getElementById('result');
+            if (data.downloadLink) {
+                result.innerHTML = `<a href="${data.downloadLink}" target="_blank">Download Video</a>`;
+            } else {
+                result.innerText = data.error;
+            }
+        });
+    </script>
+</body>
+</html>
