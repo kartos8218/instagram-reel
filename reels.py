@@ -2,7 +2,7 @@ from instascrape import Reel
 import time
 
 # session id
-SESSIONID = "Paste session Id Here"
+SESSIONID = "8t6fsm:1729062492893"
 
 # Header with session id
 headers = {
