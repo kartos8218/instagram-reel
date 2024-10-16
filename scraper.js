@@ -1,27 +1,42 @@
-from instascrape import Reel
-import time
+// scraper.js
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const axios = require("axios");
+const cheerio = require("cheerio");
 
-# session id
-SESSIONID = "8t6fsm:1729062492893"
+app.use(express.json());
+app.use(cors());
 
-# Header with session id
-headers = {
-	"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
-	AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.74 \
-	Safari/537.36 Edg/79.0.309.43",
-	"cookie": f'sessionid={SESSIONID};'
-}
+// accepts the URL of an Instagram page
+const getVideo = async (url) => {
+  const html = await axios.get(url);
+  const $ = cheerio.load(html.data);
+  const videoString = $("meta[property='og:video']").attr("content");
+  return videoString;
+};
 
-# Passing Instagram reel link as argument in Reel Module
-insta_reel = Reel(
-	'https://www.instagram.com/reel/CKWDdesgv2l/?utm_source=ig_web_copy_link')
+// the callback is an async function
+app.post("/api/download", async (request, response) => {
+  console.log("request coming in...");
+  try {
+    const videoLink = await getVideo(request.body.url);
+    if (videoLink !== undefined) {
+      response.json({ downloadLink: videoLink });
+    } else {
+      response.json({ error: "The link you have entered is invalid." });
+    }
+  } catch (err) {
+    response.json({
+      error: "There is a problem with the link you have provided.",
+    });
+  }
+});
 
-# Using scrape function and passing the headers
-insta_reel.scrape(headers=headers)
+const PORT = process.env.PORT || 3001;
 
-# Giving path where we want to download reel to the 
-# download function
-insta_reel.download(fp=f".\\Desktop\\reel{int(time.time())}.mp4")
+app.listen(PORT, () => {
+  console.log(`listening on ${PORT}`);
+});
 
-# printing success Message
-print('Downloaded Successfully.')
+module.exports = app;
