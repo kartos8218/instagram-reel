@@ -3,32 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Video Downloader</title>
+    <title>Content Replacer Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .utlimate-arena-lyrical-cont {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 20px;
+        }
+        .inline-lyrical-cont {
+            display: flex;
+            align-items: center;
+        }
+        .img-inside img {
+            max-width: 150px;
+            margin-right: 20px;
+        }
+        .cont-inside h2 {
+            margin: 0 0 10px;
+        }
+        .ads-cit {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        .btn-group {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Instagram Video Downloader</h1>
-    <input type="text" id="url" placeholder="Enter Instagram video URL" />
-    <button id="downloadBtn">Download Video</button>
-    <p id="result"></p>
 
-    <script>
-        document.getElementById('downloadBtn').addEventListener('click', async () => {
-            const url = document.getElementById('url').value;
-            const response = await fetch('https://your-app-name.onrender.com/api/download', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ url }),
-            });
-            const data = await response.json();
-            const result = document.getElementById('result');
-            if (data.downloadLink) {
-                result.innerHTML = `<a href="${data.downloadLink}" target="_blank">Download Video</a>`;
-            } else {
-                result.innerText = data.error;
-            }
-        });
-    </script>
+<div class="container">
+    <h1>Content Replacer Tool</h1>
+    <div class="form-group">
+        <label for="imageUrl">Image URL:</label>
+        <input type="text" id="imageUrl" placeholder="Enter image URL">
+    </div>
+    <div class="form-group">
+        <label for="titleText">Title Text:</label>
+        <input type="text" id="titleText" placeholder="Enter title text">
+    </div>
+    <div class="form-group">
+        <label for="releaseDate">Release Date:</label>
+        <input type="text" id="releaseDate" placeholder="Enter release date">
+    </div>
+
+    <div class="btn-group">
+        <button id="replaceButton">Replace Content</button>
+        <button id="copyButton">Copy New Content</button>
+    </div>
+
+    <div id="contentToCopy" class="utlimate-arena-lyrical-cont">
+        <div class="inline-lyrical-cont">
+            <div class="img-inside">
+                <img src="option_1" alt="Image Placeholder" id="imageDisplay"/>
+            </div>
+            <div class="cont-inside">
+                <h2 id="titleDisplay">option_2</h2> 
+                <p>Release: <span style="opacity:.8" id="releaseDisplay">option_3</span></p> 
+            </div>
+        </div>
+        <div class="ads-cit">Advertisements Here</div>
+    </div>
+</div>
+
+<script>
+    // Replace Content Functionality
+    document.getElementById('replaceButton').addEventListener('click', function() {
+        // Get the input values
+        const imageUrl = document.getElementById('imageUrl').value;
+        const titleText = document.getElementById('titleText').value;
+        const releaseDate = document.getElementById('releaseDate').value;
+
+        // Replace the content in the displayed section
+        document.getElementById('imageDisplay').src = imageUrl;
+        document.getElementById('titleDisplay').innerText = titleText;
+        document.getElementById('releaseDisplay').innerText = releaseDate;
+    });
+
+    // Copy New Content Functionality
+    document.getElementById('copyButton').addEventListener('click', function() {
+        const contentToCopy = document.getElementById('contentToCopy').outerHTML;
+
+        // Create a temporary textarea element to hold the content for copying
+        const tempTextarea = document.createElement('textarea');
+        tempTextarea.value = contentToCopy;
+        document.body.appendChild(tempTextarea);
+        
+        // Select the content and copy it
+        tempTextarea.select();
+        document.execCommand('copy');
+        
+        // Remove the temporary textarea
+        document.body.removeChild(tempTextarea);
+        
+        // Optionally notify the user that the content was copied
+        alert('New content copied to clipboard!');
+    });
+</script>
+
 </body>
 </html>
