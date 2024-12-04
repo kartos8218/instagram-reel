@@ -1,142 +1,241 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Content Replacer Tool</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-right: 10px;
-        }
-        .utlimate-arena-lyrical-cont {
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            padding: 20px;
-        }
-        .inline-lyrical-cont {
-            display: flex;
-            align-items: center;
-        }
-        .img-inside img {
-            max-width: 150px;
-            margin-right: 20px;
-        }
-        .cont-inside h2 {
-            margin: 0 0 10px;
-        }
-        .ads-cit {
-            margin-top: 20px;
-            background-color: #f9f9f9;
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #eee;
-        }
-        .btn-group {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-
 <div class="container">
-    <h1>Content Replacer Tool</h1>
-    <div class="form-group">
-        <label for="imageUrl">Image URL (option_1):</label>
-        <input type="text" id="imageUrl" placeholder="Enter image URL">
-    </div>
-    <div class="form-group">
-        <label for="titleText">Title Text (option_2):</label>
-        <input type="text" id="titleText" placeholder="Enter title text">
-    </div>
-    <div class="form-group">
-        <label for="releaseDate">Release Date (option_3):</label>
-        <input type="text" id="releaseDate" placeholder="Enter release date">
-    </div>
+        <h1>Content Editor</h1>
+        <!-- Input fields for replacements -->
+        <div id="replacementInputs">
+            <!-- Template will dynamically generate inputs -->
+        </div>
 
-    <div class="btn-group">
-        <button id="replaceButton">Replace Content</button>
+        <textarea id="updatedContent" readonly></textarea>
         <button id="copyButton">Copy New Content</button>
     </div>
 
-    <div id="contentToCopy" class="utlimate-arena-lyrical-cont">
-        <div class="inline-lyrical-cont">
-            <div class="img-inside">
-                <img src="option_1" alt="Image Placeholder" id="imageDisplay"/>
-            </div>
-            <div class="cont-inside">
-                <h2 id="titleDisplay">option_2</h2> 
-                <p>Release: <span style="opacity:.8" id="releaseDisplay">option_3</span></p> 
-            </div>
-        </div>
-        <div class="ads-cit">
-            
-        </div>
-        <span><!--more--></span> <!-- The newly added "more" element -->
-    </div>
+    <script>
+        // Initialize content
+        const originalText = `<div class="intro-mod">
+<div class="intro-img-ofmod">
+<img src="AppIcon" alt="AppName"/>
+</div>
+<div class="time-and-name">
+<h3>AppName v201901 MOD APK (Feature)</h3>
+<p>DateandTime</p>
+</div>
 </div>
 
+<div class="intro-des-mod">
+<p style="font-family:monospace;font-size: 0.8em;"><b style="color: #36c275;">AppName Mod APK</b> ExtraContent</p>
+</div>
+
+<div class="table-of-info-mod">
+<div class="consist-of-mod-info">
+<div class="head-of-mod-info first">App Name</div>
+<div class="head-of-mod-info second">AppName</div>
+</div>
+
+<div class="consist-of-mod-info">
+<div class="head-of-mod-info first">Genre</div>
+<div class="head-of-mod-info second">TypeofApp</div>
+</div>
+
+<div class="consist-of-mod-info">
+<div class="head-of-mod-info first">Size</div>
+<div class="head-of-mod-info second">SizeofApp</div>
+</div>
+
+<div class="consist-of-mod-info">
+<div class="head-of-mod-info first">Latest Version</div>
+<div class="head-of-mod-info second">201901</div>
+</div>
+
+<div class="consist-of-mod-info">
+<div class="head-of-mod-info first">MOD InfoVIP</div>
+<div class="head-of-mod-info second">Feature</div>
+</div>
+
+<div class="consist-of-mod-info last">
+<div class="head-of-mod-info first">Get it On</div>
+<div class="head-of-mod-info second"><a href="PlayLink"><img src="https://liteapks.com/wp-content/themes/k/images/google-play.png"/></a></div>
+</div>
+</div>
+
+
+<center>
+<div class="scroll-container">
+    <div class="image-wrapper">
+        <img src="Image 1" alt="AppName Mod Apk"/>
+        <img src="Image 2" alt="AppName Mod Apk"/>
+        <img src="Image 3" alt="AppName Mod Apk"/>
+        <img src="Image 4" alt="AppName Mod Apk"/>
+</div>
+  </div>
+  </center>
+
+<button onclick="location.href='https://www.example.com'" class="btn-mod-download">Download Mod Apk (SizeofApp)</button>
+
+<style>
+
+.intro-mod{display:inline-flex;width:100%;gap:30px;}
+.intro-img-ofmod{width:85px;height:85px;}
+.intro-img-ofmod img{width:85px;height:85px;}
+.time-and-name{align-content:center;width:70%}
+.time-and-name h3{font-size:1.3em;margin:0;}
+.time-and-name p{opacity:.7;margin:0}
+.intro-des-mod{padding:4px 20px;border-radius:9px;background:#f0efef70;margin-top:40px;}
+.table-of-info-mod{border-radius:20px;border:1px solid #f0f0f0;padding:10px 0 0 0;width:90%;margin:50px auto;}
+.consist-of-mod-info{display:inline-flex;width:100%;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f0f0f0;}
+.consist-of-mod-info:nth-child(even) { color: #36c275; }
+.consist-of-mod-info.last {border-bottom-left-radius:20px;border-bottom-right-radius:20px;border:none;}
+.head-of-mod-info{padding:0 12px;}
+.head-of-mod-info.first{font-weight:500}
+  .scroll-container{width:100%;display:inline-flex;justify-content:space-between}
+  .image-wrapper{width:100%;height:auto;display: block; columns: 1;}
+  .image-wrapper img{border-radius:6px;}
+
+
+</style>`;
+
+        // Words to replace
+        const wordsToReplace = ["AppIcon", "AppName", "201901", "Feature", "DateandTime", "ExtraContent", "TypeofApp", "SizeofApp", "PlayLink", "Image 1", "Image 2", "Image 3", "Image 4"];
+
+        // Generate input fields dynamically
+        const replacementInputsDiv = document.getElementById("replacementInputs");
+
+        wordsToReplace.forEach((word, index) => {
+            const replacementGroup = document.createElement("div");
+            replacementGroup.className = "replacement-group";
+
+            const label = document.createElement("label");
+            label.setAttribute("for", `replaceWord${index}`);
+            label.textContent = `Replace "${word}":`;
+
+            const input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("id", `replaceWord${index}`);
+            input.setAttribute("placeholder", `Enter a word to replace "${word}"`);
+
+            replacementGroup.appendChild(label);
+            replacementGroup.appendChild(input);
+            replacementInputsDiv.appendChild(replacementGroup);
+        });
+
+        // Listen for changes in inputs
+        const updatedContent = document.getElementById("updatedContent");
+        const replacementInputs = Array.from(document.querySelectorAll("input"));
+
+        replacementInputs.forEach((input, index) => {
+            input.addEventListener("input", () => {
+                let newText = originalText;
+                replacementInputs.forEach((field, i) => {
+                    const replacementWord = field.value || wordsToReplace[i]; // Use the input value or default word
+                    const regex = new RegExp(wordsToReplace[i], "gi");
+                    newText = newText.replace(regex, replacementWord);
+                });
+                updatedContent.value = newText;
+            });
+        });
+
+        // Copy functionality
+        const copyButton = document.getElementById("copyButton");
+        copyButton.addEventListener("click", () => {
+            updatedContent.select();
+            document.execCommand("copy");
+            alert("New content copied to clipboard!");
+        });
+    </script>
+    
+    <div style="margin-top:40px"/>
+    
+    <div id="ilike">Loading... </div>
+
+<script type="text/javascript">
+//<![CDATA[
+var start=1;var max=150;var ilikeArr=new Array();function runilike(){var scpt=document.createElement('script');scpt.src='https://mods.mdiskteraboxdownloader.online/feeds/posts/summary?alt=json&callback=ilike&start-index='+start+'&max-results='+max;document.body.appendChild(scpt)} function ilike(root){var elem=document.getElementById('ilike');if(!elem)return;elem.innerHTML='';var feed=root.feed;if(feed.entry.length>0){for(var i=0;i<feed.entry.length;i++){var entry=feed.entry[i];var title=entry.title.$t;for(var j=0;j<entry.link.length;j++){if(entry.link[j].rel=="alternate"){var url=entry.link[j].href;if(url&&url.length>0&&title&&title.length>0){ilikeArr.push({'url':url,'judul':title})} break}}} if(feed.entry.length>=max){start+=max;runilike()} else{var print='';for(var x=0;x<Math.min(ilikeArr.length, 4);x++){print+='<li><a href=\"'+ilikeArr[x].url+'\" title=\"'+ilikeArr[ x].judul+'\">'+ilikeArr[x].judul+'</a></li>'}elem.innerHTML='<div class=\"title\">Related Posts:</div><ol>'+print+'</ol>'}}} runilike();
+  //]]> </script><script src="https://mods.mdiskteraboxdownloader.online/feeds/posts/summary?alt=json&amp;callback=ilike&amp;start-index=1&amp;max-results=150"></script>
+
+<div style="margin-top:40px"/>
+
+<div class="container">
+    <h2>Text to Permalink Converter</h2>
+    <input type="text" id="textInput" placeholder="Enter text">
+    <button onclick="convertToPermalink()">Convert</button>
+    <div class="permalink" id="permalinkOutput"></div>
+</div>
+
+
 <script>
-    // Replace Content Functionality
-    document.getElementById('replaceButton').addEventListener('click', function() {
-        // Get the input values
-        const imageUrl = document.getElementById('imageUrl').value;
-        const titleText = document.getElementById('titleText').value;
-        const releaseDate = document.getElementById('releaseDate').value;
-
-        // Replace the content in the displayed section
-        document.getElementById('imageDisplay').src = imageUrl;
-        document.getElementById('titleDisplay').innerText = titleText;
-        document.getElementById('releaseDisplay').innerText = releaseDate;
-    });
-
-    // Copy New Content Functionality
-    document.getElementById('copyButton').addEventListener('click', function() {
-        const contentToCopy = document.getElementById('contentToCopy').outerHTML;
-
-        // Create a temporary textarea element to hold the content for copying
-        const tempTextarea = document.createElement('textarea');
-        tempTextarea.value = contentToCopy;
-        document.body.appendChild(tempTextarea);
-        
-        // Select the content and copy it
-        tempTextarea.select();
-        document.execCommand('copy');
-        
-        // Remove the temporary textarea
-        document.body.removeChild(tempTextarea);
-        
-        // Optionally notify the user that the content was copied
-        alert('New content copied to clipboard!');
-    });
+function convertToPermalink() {
+    var inputText = document.getElementById("textInput").value.trim();
+    var permalink = inputText.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    document.getElementById("permalinkOutput").textContent = permalink;
+}
 </script>
 
-</body>
-</html>
+<link href="https://fonts.googleapis.com/css?family=Rubik:300,500" rel="stylesheet">
+
+<style>
+  /*
+Blogger Sitemap Simple Title Only Sort By Title (Alphabetically)
+Original Post: https://www.igniel.com/2019/02/sitemap-daftar-isi-hanya-judul-abjad.html
+*/
+#ilike {padding: 20px 20px 0;border: 1px solid #36c275; border-radius: 15px;}
+#ilike .title{font-size: 1.4em; font-weight: 500;}
+#ilike .judul {font-size: 150%; color: #000; font-weight: 500; padding: 7px;}
+#ilike a {color: #666; text-decoration: none; transition: all .3s ease;}
+#ilike a:hover {color: #36c275;}
+#ilike ol {margin: 9px 22px 0; padding: 0; display: inline-grid; grid-template-columns: 1fr; column-gap: 10px; row-gap: 3px;}
+#ilike ol li {color: #666; font-weight: 300; list-style-type: decimal; margin: 0; padding: 10px; line-height: 1.5em; font-size: 15px;}
+  .container{margin-top:55px;}
+  #textInput{border-radius: 9px; background: #f1efef;outline: none;width: 80%;padding: 15px;border:none}
+  button{padding: 15px 22px;background-color:#36c275;border-radius:9px;border:none;color:#fff;cursor:pointer;}
+  #permalinkOutput{border-radius: 9px; background: #faf5f5;outline: none;width: 90%;padding: 15px;border:none;margin-top:20px;}
+  
+   body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .replacement-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            margin-bottom: 5px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+</style>
